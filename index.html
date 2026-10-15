@@ -42,7 +42,7 @@
 				<section class="destination" aria-labelledby="destination-name">
 					<p class="label">DESTINATION</p>
 					<h2 id="destination-name">LA FRONTIÈRE</h2>
-					<p class="confirmation">Vous pourrez vous mettre que trop bien là-bas.</p>
+					<p class="confirmation">Vous pourrez continuer de voutre mettre bien.</p>
 					<p class="confirmation">Ayez votre passe avec vous.</p>
 				</section>
 			</main>
@@ -51,5 +51,40 @@
 				<p>INVITATION STRICTEMENT PERSONNELLE</p>
 			</footer>
 		</article>
+
+		<section class="trailer-gate" aria-label="Accès à la séquence de la bande-annonce">
+			<button id="trailer-trigger" type="button">OUVRIR</button>
+		</section>
+
+		<div id="trailer-sequence" class="sequence" role="status" aria-live="assertive" hidden>
+			<div class="sequence-loading" hidden>
+				<p style="font-size: 12px">CHARGEMENT</p>
+				<div class="loading-line" aria-hidden="true"><span></span></div>
+			</div>
+			<p class="sequence-result" data-text="You are Selected." hidden>You are Selected.</p>
+		</div>
+
+		<script>
+			(() => {
+				const trigger = document.querySelector("#trailer-trigger");
+				const sequence = document.querySelector("#trailer-sequence");
+				const loading = sequence.querySelector(".sequence-loading");
+				const result = sequence.querySelector(".sequence-result");
+				const wait = (duration) => new Promise((resolve) => setTimeout(resolve, duration));
+
+				trigger.addEventListener("click", async () => {
+					trigger.disabled = true;
+					document.body.classList.add("sequence-active");
+					sequence.hidden = false;
+
+					await wait(3000);
+					loading.hidden = false;
+
+					await wait(2400);
+					loading.hidden = true;
+					result.hidden = false;
+				});
+			})();
+		</script>
 	</body>
 </html>

@@ -2,9 +2,15 @@
 <html lang="fr">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 		<meta name="theme-color" content="#050505" />
+		<meta name="mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<meta name="apple-mobile-web-app-title" content="La Frontière" />
 		<title>Résultat du tirage</title>
+		<link rel="manifest" href="manifest.webmanifest" />
+		<link rel="apple-touch-icon" href="icons/icon-180.png" />
 		<link rel="stylesheet" href="style.css" />
 	</head>
 	<body>
@@ -61,10 +67,18 @@
 				<p style="font-size: 12px">CHARGEMENT</p>
 				<div class="loading-line" aria-hidden="true"><span></span></div>
 			</div>
-			<p class="sequence-result" data-text="You are Selected." hidden>You are Selected.</p>
+			<p class="sequence-result" data-text="YOU HAVE BEEN SELECTED." hidden>YOU HAVE BEEN SELECTED.</p>
 		</div>
 
 		<script>
+			if ("serviceWorker" in navigator) {
+				window.addEventListener("load", () => {
+					navigator.serviceWorker.register("./service-worker.js").catch((error) => {
+						console.warn("Service worker registration failed:", error);
+					});
+				});
+			}
+
 			(() => {
 				const trigger = document.querySelector("#trailer-trigger");
 				const sequence = document.querySelector("#trailer-sequence");

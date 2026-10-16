@@ -85,8 +85,18 @@
 				const loading = sequence.querySelector(".sequence-loading");
 				const result = sequence.querySelector(".sequence-result");
 				const wait = (duration) => new Promise((resolve) => setTimeout(resolve, duration));
+				const enterFullscreen = () => {
+					const root = document.documentElement;
+
+					if (document.fullscreenElement || !root.requestFullscreen) return;
+
+					root.requestFullscreen({ navigationUI: "hide" }).catch(() => {
+						// Fullscreen display mode still applies when launched as an installed PWA.
+					});
+				};
 
 				trigger.addEventListener("click", async () => {
+					enterFullscreen();
 					trigger.disabled = true;
 					document.body.classList.add("sequence-active");
 					sequence.hidden = false;

@@ -15,6 +15,13 @@ body {
 	min-height: 100%;
 }
 
+html:fullscreen,
+html:fullscreen body {
+	width: 100%;
+	min-height: 100%;
+	background: #000;
+}
+
 body {
 	margin: 0;
 	background: var(--black);
@@ -402,6 +409,13 @@ footer p + p {
 	.sequence-result::before,
 	.sequence-result::after {
 		display: none;
+	}
+}
+
+@media (display-mode: fullscreen) {
+	.screen,
+	.sequence {
+		min-height: 100dvh;
 	}
 }
 

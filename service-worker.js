@@ -1,4 +1,4 @@
-const CACHE_NAME = "la-frontiere-v1";
+const CACHE_NAME = "la-frontiere-v2";
 const APP_SHELL = [
   "./",
   "./index.html",
